@@ -1,6 +1,7 @@
-import ContactMail from '../jobs/ContactMail';
-import WorkMail from '../jobs/WorkMail';
 import Queue from '../../lib/Queue';
+
+import WorkMail from '../../app/jobs/WorkMail';
+import ContactMail from '../../app/jobs/ContactMail';
 
 class MailController {
   async store(req, res) {
@@ -9,15 +10,14 @@ class MailController {
 
     const form = req.body;
 
-    let response;
-
     if (tipo === 'contact') {
-      response = await Queue.add(ContactMail.key, { form });
+
+      await Queue.add(ContactMail.key, { form });
     } else if (tipo === 'work') {
-      response = await Queue.add(WorkMail.key, { form });
+      await Queue.add(WorkMail.key, { form });
     }
 
-    return res.json({ status: response.status });
+    return res.json({});
   }
 }
 

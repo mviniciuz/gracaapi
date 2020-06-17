@@ -7,7 +7,7 @@ export default {
   },
   secure: false,
   default: {
-    from: 'Graça Advogados Associados <contato@graca.adv.br>',
+    from: 'Teste e-mail graça <m.viniciuz@hotmail.com>',
   },
 };
 

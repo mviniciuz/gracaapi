@@ -1,0 +1,86 @@
+version: '3.6'
+
+networks:
+  graca:
+    driver: bridge
+
+services:
+
+  graca-api:
+    build: .
+
+    volumes:
+      - /home/node/api
+
+    environment:
+      - MONGO_URL=graca-mongo
+      - REDIS_URL=graca-redis
+    depends_on:
+      - graca-mongo
+      - graca-redis
+    networks:
+      - graca
+    links:
+      - graca-mongo
+      - graca-redis
+    container_name: graca-api
+    command: yarn dev
+    ports:
+      - 3333:3333
+
+  graca-queue:
+    build: .
+
+    volumes:
+      - /home/node/api
+
+    environment:
+      - MONGO_URL=graca-mongo
+      - REDIS_URL=graca-redis
+    depends_on:
+      - graca-mongo
+      - graca-redis
+    networks:
+      - graca
+    links:
+      - graca-mongo
+      - graca-redis
+    container_name: graca-queue
+    command: yarn queue
+
+  graca-mongo:
+    image: bitnami/mongodb:latest
+    container_name: graca-mongo
+    restart: always
+    volumes:
+      - /home/node/api/mongo
+
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - MONGODB_USERNAME=${MONGO_USER}
+      - MONGODB_PASSWORD=${MONGO_PASS}
+      - MONGODB_DATABASE=${MONGO_DB}
+    ports:
+      - 27017:27017
+
+    networks:
+      - graca
+
+  graca-redis:
+    image: bitnami/redis:latest
+    container_name: graca-redis
+    restart: always
+
+    volumes:
+      - /home/node/api/redis
+
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${REDIS_PASS}
+    ports:
+      - 6379:6379
+
+    networks:
+      - graca
+
+

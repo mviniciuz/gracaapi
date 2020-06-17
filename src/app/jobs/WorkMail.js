@@ -1,13 +1,11 @@
-import Mail from '../../lib/Mail';
+import Mail from '../../lib/mail';
 
 class WorkMail {
   get key() {
     return 'WorkMail';
   }
 
-
   async handle({ data }) {
-
 
     const { form } = data;
 
