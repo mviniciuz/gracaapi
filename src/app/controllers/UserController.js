@@ -59,7 +59,7 @@ class UserController {
         password ? field.required('informe a Confirmação de senha').oneOf([Yup.ref('password')]) : field
       ),
     });
-    await schema.validate(req.body).catch(function (err) {
+    await schema.validate(req.body).catch((err) => {
       return res.json({ erro: err.errors[0] });
     });
 
