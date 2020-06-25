@@ -9,6 +9,7 @@ import 'express-async-errors';
 
 import routes from './routes';
 import sentryConfig from './config/sentry';
+import arenaConfig from './config/arena';
 
 import './database';
 
@@ -31,6 +32,7 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
+    this.server.use('/', arenaConfig);
   }
 
   routes() {

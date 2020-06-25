@@ -12,11 +12,8 @@ class Mail {
       host,
       port,
       secure,
-      auth: auth.user ? auth : null,
-      pool: true, // use pooled connection
-      rateLimit: true, // enable to make sure we are limiting
-      maxConnections: 1, // set limit to 1 connection only
-      maxMessages: 2, // send 3 emails per second
+      auth: auth.user ? auth : null
+
     });
 
     this.configureTempates();

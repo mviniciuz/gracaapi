@@ -1,5 +1,7 @@
 import Bee from 'bee-queue';
 
+import Mail from '../app/schemas/Mail';
+
 import CancellationMail from '../app/jobs/CancellationMail';
 import WorkMail from '../app/jobs/WorkMail';
 import ContactMail from '../app/jobs/ContactMail';
@@ -19,6 +21,8 @@ class Queue {
       this.queues[key] = {
         bee: new Bee(key, {
           redis: redisConfig,
+          storeJobs: true,
+          delayedDebounce: 2000,
         }),
         handle,
       };
@@ -26,7 +30,8 @@ class Queue {
   }
 
   add(queue, job) {
-    return this.queues[queue].bee.createJob(job).save();
+    return this.queues[queue].bee.createJob(job)
+      .save()
   }
 
   processQueue() {
@@ -37,7 +42,7 @@ class Queue {
     });
   }
 
-  handleFailure(job, err) {
+  async handleFailure(job, err) {
     if (process.env.NODE_ENV === 'development') {
       console.log(`Queue ${job.queue.name}: FAILED`, err);
     }

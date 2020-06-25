@@ -4,6 +4,8 @@ import multerConfig from './config/multer';
 
 import authMiddleware from './app/middlewares/auth';
 
+import ConfigController from './app/controllers/ConfigController';
+
 import SessionController from './app/controllers/SessionController';
 
 import FileController from './app/controllers/FileController';
@@ -14,6 +16,8 @@ import User from './app/schemas/User';
 
 import TeamController from './app/controllers/TeamController';
 import PositionController from './app/controllers/PositionsController';
+import TagController from './app/controllers/TagController';
+import ContactController from './app/controllers/ContactController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -27,6 +31,9 @@ routes.put('/users', UserController.update);
 routes.get('/users/:id', UserController.show);
 routes.get('/users', UserController.index);
 routes.delete('/users/:id', UserController.delete);
+
+routes.post('/config', ConfigController.store);
+routes.get('/config', ConfigController.index);
 
 routes.post('/position', PositionController.store);
 routes.delete('/position/:id', PositionController.delete);
@@ -42,6 +49,14 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/mail/:tipo', MailController.store);
 
+routes.post('/tag', TagController.store);
+routes.delete('/tag/:id', TagController.delete);
+routes.get('/tag', TagController.index);
 
+routes.post('/contact', ContactController.store);
+routes.put('/contact/:id', ContactController.update);
+routes.delete('/contact/:id', ContactController.delete);
+routes.get('/contact/:id', ContactController.show);
+routes.get('/contact', ContactController.index);
 
 export default routes;

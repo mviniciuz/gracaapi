@@ -9,6 +9,7 @@
     "agendash": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
+    "bull-arena": "^2.8.1",
     "cors": "^2.8.5",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",

@@ -1,4 +1,4 @@
-import File from '../schemas/file';
+import File from '../schemas/File';
 
 class FileController {
   async store(req, res) {
