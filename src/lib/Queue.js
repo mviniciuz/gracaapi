@@ -32,6 +32,9 @@ class Queue {
   add(queue, job) {
     return this.queues[queue].bee.createJob(job)
       .save()
+      .retries(5)
+      .timeout(60000)
+
   }
 
   processQueue() {

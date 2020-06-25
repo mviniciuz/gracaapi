@@ -11,6 +11,10 @@ const Contact = new mongoose.Schema({
     type: String,
   },
   tags: [String]
-});
+},
+  {
+    timestamps: true,
+  }
+);
 
 export default mongoose.model('Contact', Contact);

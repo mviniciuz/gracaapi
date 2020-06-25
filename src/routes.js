@@ -18,6 +18,7 @@ import TeamController from './app/controllers/TeamController';
 import PositionController from './app/controllers/PositionsController';
 import TagController from './app/controllers/TagController';
 import ContactController from './app/controllers/ContactController';
+import NewsController from './app/controllers/NewsController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -58,5 +59,11 @@ routes.put('/contact/:id', ContactController.update);
 routes.delete('/contact/:id', ContactController.delete);
 routes.get('/contact/:id', ContactController.show);
 routes.get('/contact', ContactController.index);
+
+routes.post('/news', NewsController.store);
+routes.put('/news/:id', NewsController.update);
+routes.delete('/news/:id', NewsController.delete);
+routes.get('/news/:id', NewsController.show);
+routes.get('/news', NewsController.index);
 
 export default routes;
