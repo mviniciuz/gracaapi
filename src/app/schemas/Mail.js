@@ -13,15 +13,10 @@ const Mail = new mongoose.Schema({
   message: {
     type: String,
   },
-  redisId: {
-    type: Number,
-  },
-  status: {
+  newsId: {
     type: String,
   },
-  descriptionStatus: {
-    type: String,
-  }
+  tags: [String]
 },
   {
     timestamps: true,

@@ -11,7 +11,7 @@ class NewsController {
         .required('Informe o título'),
       edition: Yup.string()
         .required('Informe a Edição'),
-      Data: Yup.string()
+      data: Yup.string()
         .required('Informe a data de publicação'),
       author: Yup.string()
         .required('Informe o autor'),

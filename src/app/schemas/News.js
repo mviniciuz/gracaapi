@@ -4,7 +4,7 @@ const News = new mongoose.Schema({
   type: String,
   title: String,
   edition: String,
-  Data: String,
+  data: String,
   author: String,
   body: String,
   activeSite: Boolean,

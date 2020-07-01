@@ -12,8 +12,7 @@ class Mail {
       host,
       port,
       secure,
-      auth: auth.user ? auth : null
-
+      auth: auth.user ? auth : null,
     });
 
     this.configureTempates();

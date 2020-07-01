@@ -48,7 +48,7 @@ routes.get('/team', TeamController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
-routes.post('/mail/:tipo', MailController.store);
+routes.post('/mail', MailController.store);
 
 routes.post('/tag', TagController.store);
 routes.delete('/tag/:id', TagController.delete);

@@ -5,9 +5,10 @@ import Mail from '../app/schemas/Mail';
 import CancellationMail from '../app/jobs/CancellationMail';
 import WorkMail from '../app/jobs/WorkMail';
 import ContactMail from '../app/jobs/ContactMail';
+import LoteMail from '../app/jobs/LoteMail';
 import redisConfig from '../config/redis';
 
-const jobs = [CancellationMail, WorkMail, ContactMail];
+const jobs = [CancellationMail, WorkMail, ContactMail, LoteMail];
 
 class Queue {
   constructor() {
@@ -32,9 +33,6 @@ class Queue {
   add(queue, job) {
     return this.queues[queue].bee.createJob(job)
       .save()
-      .retries(5)
-      .timeout(60000)
-
   }
 
   processQueue() {
