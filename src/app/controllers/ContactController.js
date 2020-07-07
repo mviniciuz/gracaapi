@@ -12,10 +12,13 @@ class ContactController {
         .required('O E-mail é obrigatório'),
       phone: Yup.string(),
       tags: Yup.array(),
+      status: Yup.boolean()
+        .required('Informe o status')
     })
     schema.validate(req.body).catch((err) => {
       return res.json({ erro: err.errors[0] })
     });
+
 
     const { mail } = req.body
 
@@ -37,6 +40,9 @@ class ContactController {
         .required('O E-mail é obrigatório'),
       phone: Yup.string(),
       tags: Yup.array(),
+      status: Yup.boolean()
+        .required('Informe o status')
+
     })
     schema.validate(req.body).catch((err) => {
       return res.json({ erro: err.errors[0] })
@@ -46,6 +52,9 @@ class ContactController {
     const id = req.params.id;
 
     const contact = await Contact.findById(id);
+    if (!contact) {
+      return res.json({ erro: 'Contato não encontrado' });
+    }
     if (contact.mail !== mail) {
       const mailexits = await Contact.findOne({ mail });
       if (mailexits) {

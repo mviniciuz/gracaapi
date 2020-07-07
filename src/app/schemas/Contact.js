@@ -10,7 +10,8 @@ const Contact = new mongoose.Schema({
   phone: {
     type: String,
   },
-  tags: [String]
+  tags: [String],
+  status: Boolean
 },
   {
     timestamps: true,
