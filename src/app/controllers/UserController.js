@@ -35,9 +35,9 @@ class UserController {
 
     const password_hash = await bcrypt.hash(password, 8);
 
-    User.create({ document, name, email, admin, password_hash });
+    const user = await User.create({ document, name, email, admin, password_hash });
 
-    return res.json({ ok: 'Cadastro realizado com sucesso!' });
+    return res.json(user);
   }
 
 
@@ -64,7 +64,7 @@ class UserController {
     });
 
 
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.params.id);
     const { password_hash } = user;
 
     const { document, name, admin, email, oldPassword, password } = req.body;
@@ -87,7 +87,7 @@ class UserController {
       await user.update({ document, name, email, admin });
     }
 
-    const updateUser = await User.findById(req.userId);
+    const updateUser = await User.findById(req.params.id);
 
     return res.json({
       updateUser
@@ -95,14 +95,17 @@ class UserController {
   }
 
   async show(req, res) {
-    return res.json({ ok: 'show' });
+    const user = await User.findById(req.params.id);
+    return res.json(user);
   };
 
   async index(req, res) {
-    return res.json({ ok: 'index' });
+    const users = await User.find();
+    return res.json(users);
   }
 
   async delete(req, res) {
+    await User.findByIdAndDelete(req.params.id);
     return res.json({ ok: 'delete' });
   }
 }
