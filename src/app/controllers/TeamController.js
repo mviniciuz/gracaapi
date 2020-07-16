@@ -1,15 +1,11 @@
+import * as Yup from 'yup';
 import Team from '../schemas/Team';
 
-import * as Yup from 'yup';
-
 class TeamController {
-
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string()
-        .required('Informar o Nome!'),
-      position: Yup.string()
-        .required('Informa o cargo'),
+      name: Yup.string().required('Informar o Nome!'),
+      position: Yup.string().required('Informa o cargo'),
     });
     schema.validate(req.body).catch((err) => {
       return res.json({ erro: err.errors[0] });
@@ -23,10 +19,8 @@ class TeamController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string()
-        .required('Informar o Nome!'),
-      position: Yup.string()
-        .required('Informa o cargo'),
+      name: Yup.string().required('Informar o Nome!'),
+      position: Yup.string().required('Informa o cargo'),
     });
     schema.validate(req.body).catch((err) => {
       return res.json({ erro: err.errors[0] });
@@ -42,11 +36,9 @@ class TeamController {
     const teamUpdated = await Team.findById(req.params.id);
 
     return res.json(teamUpdated);
-
   }
 
   async delete(req, res) {
-
     const team = await Team.findById(req.params.id);
     if (!team) {
       return res.json({ erro: 'registro não encontrado' });

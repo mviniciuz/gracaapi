@@ -33,7 +33,6 @@ routes.delete('/users/:id', UserController.delete);
 routes.get('/users/:id', UserController.show);
 routes.get('/users', UserController.index);
 
-
 routes.post('/config', ConfigController.store);
 routes.get('/config', ConfigController.index);
 
@@ -52,6 +51,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/mail', MailController.store);
 
 routes.post('/tag', TagController.store);
+routes.put('/tag/:id', TagController.update);
 routes.delete('/tag/:id', TagController.delete);
 routes.get('/tag', TagController.index);
 
