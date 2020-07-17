@@ -64,6 +64,7 @@ class TagController {
         tag: { $regex: arg, $options: 'i' },
       };
     }
+
     const response = await Tag.find(where)
       .limit(10)
       .skip((page - 1) * 10);

@@ -6,13 +6,10 @@ import authConfig from '../../config/auth';
 import User from '../schemas/User';
 
 class SessionController {
-
   async store(req, res) {
     const schema = Yup.object().shape({
-      document: Yup.string()
-        .required('Informar o CPF ou CNPJ'),
-      password: Yup.string()
-        .required('Informar a senha')
+      document: Yup.string().required('Informar o CPF ou CNPJ'),
+      password: Yup.string().required('Informar a senha'),
     });
     await schema.validate(req.body).catch(function (err) {
       return res.json({ erro: err.errors[0] });
@@ -39,7 +36,6 @@ class SessionController {
       }),
     });
   }
-
 }
 
 export default new SessionController();

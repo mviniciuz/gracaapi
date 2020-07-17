@@ -4,32 +4,29 @@ import Mail from '../schemas/Mail';
 import Contact from '../schemas/Contact';
 import News from '../schemas/News';
 
-import WorkMail from '../../app/jobs/WorkMail';
-import ContactMail from '../../app/jobs/ContactMail';
-import LoteMail from '../../app/jobs/LoteMail';
+import WorkMail from '../jobs/WorkMail';
+import ContactMail from '../jobs/ContactMail';
+import LoteMail from '../jobs/LoteMail';
 
 class MailController {
-
   async store(req, res) {
-
     const { rota } = req.query;
     const form = req.body;
 
     let work;
     if (rota === 'contact') {
-
       work = await Queue.add(ContactMail.key, { form });
     }
     if (rota === 'work') {
-
       work = await Queue.add(WorkMail.key, { form });
     }
     if (rota === 'lote') {
-
       const { newsId } = req.body;
       const news = await News.findById(newsId);
       if (!news) {
-        return res.json({ erro: 'Informe o id do informativo ou noticia para envio' });
+        return res.json({
+          erro: 'Informe o id do informativo ou noticia para envio',
+        });
       }
 
       let contacts = [];
@@ -45,7 +42,7 @@ class MailController {
           data: news.data,
           author: news.author,
           body: new Buffer(news.body, 'base64').toString('utf-8'),
-        }
+        };
         work = await Queue.add(LoteMail.key, { formUpdate });
       });
     }
@@ -53,7 +50,6 @@ class MailController {
     const sendMail = await Mail.create(req.body);
     return res.json(sendMail);
   }
-
 }
 
 export default new MailController();

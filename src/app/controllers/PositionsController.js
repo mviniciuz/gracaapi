@@ -1,15 +1,13 @@
-import Position from '../schemas/Position';
 import * as Yup from 'yup';
+import Position from '../schemas/Position';
 
 class PositionController {
-
   async store(req, res) {
     const schema = Yup.object().shape({
-      position: Yup.string()
-        .required('Informar o Nome do cargo')
-    })
+      position: Yup.string().required('Informar o Nome do cargo'),
+    });
     schema.validate(req.body).catch((err) => {
-      return res.json({ erro: err.erros[0] })
+      return res.json({ erro: err.erros[0] });
     });
 
     const position = await Position.create(req.body);
@@ -18,7 +16,6 @@ class PositionController {
   }
 
   async delete(req, res) {
-
     const { id } = req.params;
 
     const position = await Position.findById(id);
@@ -32,7 +29,6 @@ class PositionController {
   }
 
   async index(req, res) {
-
     const positions = await Position.find();
 
     return res.json(positions);
