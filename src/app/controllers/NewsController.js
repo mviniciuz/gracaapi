@@ -13,7 +13,7 @@ class NewsController {
       activeSite: Yup.boolean().required('Informe o status'),
     });
     schema.validate(req.body).catch((err) => {
-      return res.status(400).json(err.errors[0]);
+      return res.status(400).json(err.erro[0]);
     });
 
     const response = await News.create(req.body);
@@ -26,13 +26,13 @@ class NewsController {
       type: Yup.string().required('Informe o tipo'),
       title: Yup.string().required('Informe o título'),
       edition: Yup.string().required('Informe a Edição'),
-      Data: Yup.string().required('Informe a data de publicação'),
+      data: Yup.string().required('Informe a data de publicação'),
       author: Yup.string().required('Informe o autor'),
       body: Yup.string().required('Informe texto a ser exibido na publicação'),
       activeSite: Yup.boolean().required('Informe o status'),
     });
     schema.validate(req.body).catch((err) => {
-      return res.status(400).json(err.errors[0]);
+      return res.status(400).json(err.erro[0]);
     });
 
     const { id } = req.params;

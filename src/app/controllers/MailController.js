@@ -24,7 +24,7 @@ class MailController {
       const { newsId } = req.body;
       const news = await News.findById(newsId);
       if (!news) {
-        return res.json({
+        return res.status(400).json({
           erro: 'Informe o id do informativo ou noticia para envio',
         });
       }
@@ -49,6 +49,33 @@ class MailController {
 
     const sendMail = await Mail.create(req.body);
     return res.json(sendMail);
+  }
+
+  async index(req, res) {
+    const { page = 1, arg = '' } = req.query;
+
+    let where = {};
+    if (arg !== '') {
+      where = {
+        : { $regex: arg, $options: 'i' },
+      };
+    }
+
+    const response = await Mail.find(where)
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .skip((page - 1) * 10);
+
+    const promises = response.map(async (item) => {
+      return {
+        mail: item,
+        news: await News.findById(item.newsId),
+      };
+    });
+
+    const mails = await Promise.all(promises);
+
+    return res.json(mails);
   }
 }
 

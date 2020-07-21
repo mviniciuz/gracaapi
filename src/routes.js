@@ -12,7 +12,6 @@ import FileController from './app/controllers/FileController';
 import MailController from './app/controllers/MailController';
 
 import UserController from './app/controllers/UserController';
-import User from './app/schemas/User';
 
 import TeamController from './app/controllers/TeamController';
 import PositionController from './app/controllers/PositionsController';
@@ -49,6 +48,7 @@ routes.get('/team', TeamController.index);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/mail', MailController.store);
+routes.get('/mail', MailController.index);
 
 routes.post('/tag', TagController.store);
 routes.put('/tag/:id', TagController.update);
