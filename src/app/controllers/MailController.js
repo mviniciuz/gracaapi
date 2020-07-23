@@ -52,19 +52,12 @@ class MailController {
   }
 
   async index(req, res) {
-    const { page = 1, arg = '' } = req.query;
+    const { page = 1 } = req.query;
 
-    let where = {};
-    if (arg !== '') {
-      where = {
-        : { $regex: arg, $options: 'i' },
-      };
-    }
-
-    const response = await Mail.find(where)
+    const response = await Mail.find()
       .sort({ createdAt: -1 })
-      .limit(10)
-      .skip((page - 1) * 10);
+      .limit(14)
+      .skip((page - 1) * 14);
 
     const promises = response.map(async (item) => {
       return {

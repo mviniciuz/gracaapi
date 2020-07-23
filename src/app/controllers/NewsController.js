@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import News from '../schemas/News';
+import Mail from '../schemas/Mail';
 
 class NewsController {
   async store(req, res) {
@@ -58,6 +59,14 @@ class NewsController {
       return res.status(400).json({ erro: 'Registro não encontrado' });
     }
 
+    const mails = await Mail.findOne({ newsId: id });
+    if (mails) {
+      return res.status(400).json({
+        erro:
+          'Registro não pode ser excluido, pois possui e-mails relacionados',
+      });
+    }
+
     await News.findByIdAndDelete(id);
 
     return res.json({ ok: 'delete' });
@@ -91,8 +100,8 @@ class NewsController {
 
     const response = await News.find(where)
       .sort({ createdAt: -1 })
-      .limit(10)
-      .skip((page - 1) * 10);
+      .limit(14)
+      .skip((page - 1) * 14);
     return res.json(response);
   }
 }

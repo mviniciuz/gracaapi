@@ -105,7 +105,15 @@ class UserController {
   }
 
   async delete(req, res) {
+    const user = await User.findById(req.params.id);
+    if (user.document === '01') {
+      return res
+        .status(400)
+        .json({ erro: 'Usuário Admin não pode ser excluído' });
+    }
+
     await User.findByIdAndDelete(req.params.id);
+
     return res.json({ ok: 'delete' });
   }
 
@@ -130,8 +138,8 @@ class UserController {
     }
 
     const users = await User.find(where)
-      .limit(10)
-      .skip((page - 1) * 10);
+      .limit(14)
+      .skip((page - 1) * 14);
     return res.json(users);
   }
 }

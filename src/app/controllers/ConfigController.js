@@ -2,7 +2,6 @@ import Config from '../schemas/Config';
 
 class ConfigController {
   async store(req, res) {
-
     const config = await Config.findOne();
 
     const { _id } = config;
@@ -18,7 +17,6 @@ class ConfigController {
     const update = await Config.find();
 
     return res.json(update);
-
   }
 }
 

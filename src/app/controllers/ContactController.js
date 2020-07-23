@@ -98,8 +98,8 @@ class ContactController {
     }
 
     const response = await Contact.find(where)
-      .limit(10)
-      .skip((page - 1) * 10);
+      .limit(14)
+      .skip((page - 1) * 14);
     return res.json(response);
   }
 }
