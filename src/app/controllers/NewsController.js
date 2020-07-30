@@ -84,24 +84,82 @@ class NewsController {
   }
 
   async index(req, res) {
-    const { page = 1, arg = '' } = req.query;
+    const {
+      page = 1,
+      limits = 14,
+      arg = '',
+      onlyActive = false,
+      type = 'all',
+    } = req.query;
 
     let where = {};
-    if (arg !== '') {
-      where = {
-        $or: [
-          { title: { $regex: arg, $options: 'i' } },
-          { edition: { $regex: arg, $options: 'i' } },
-          { author: { $regex: arg, $options: 'i' } },
-          { data: { $regex: arg, $options: 'i' } },
-        ],
-      };
+
+    if (type === 'all') {
+      if (onlyActive) {
+        where = { activeSite: true };
+        if (arg !== '') {
+          where = {
+            activeSite: true,
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
+
+      if (!onlyActive) {
+        if (arg !== '') {
+          where = {
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
+    }
+
+    if (type !== 'all') {
+      if (onlyActive) {
+        where = { activeSite: true, type };
+        if (arg !== '') {
+          where = {
+            activeSite: true,
+            type,
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
+      if (!onlyActive) {
+        where = { type };
+        if (arg !== '') {
+          where = {
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
     }
 
     const response = await News.find(where)
       .sort({ createdAt: -1 })
-      .limit(14)
-      .skip((page - 1) * 14);
+      .limit(Number(limits))
+      .skip((page - 1) * Number(limits));
+
     return res.json(response);
   }
 }
