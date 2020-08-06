@@ -25,6 +25,11 @@ const upload = multer(multerConfig);
 routes.post('/session', SessionController.store);
 routes.post('/users', UserController.store);
 
+routes.get('/news/:id', NewsController.show);
+routes.get('/news', NewsController.index);
+
+routes.post('/contact', ContactController.store);
+
 routes.use(authMiddleware);
 
 routes.put('/users/:id', UserController.update);
@@ -55,7 +60,6 @@ routes.put('/tag/:id', TagController.update);
 routes.delete('/tag/:id', TagController.delete);
 routes.get('/tag', TagController.index);
 
-routes.post('/contact', ContactController.store);
 routes.put('/contact/:id', ContactController.update);
 routes.delete('/contact/:id', ContactController.delete);
 routes.get('/contact/:id', ContactController.show);
@@ -64,7 +68,5 @@ routes.get('/contact', ContactController.index);
 routes.post('/news', NewsController.store);
 routes.put('/news/:id', NewsController.update);
 routes.delete('/news/:id', NewsController.delete);
-routes.get('/news/:id', NewsController.show);
-routes.get('/news', NewsController.index);
 
 export default routes;
