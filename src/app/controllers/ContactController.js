@@ -16,7 +16,7 @@ class ContactController {
       return res.satus(400).json({ erro: err.errors[0] });
     });
 
-    const { mail } = req.body;
+    const { mail, status = true } = req.body;
 
     const exists = await Contact.findOne({ mail });
     if (exists) {

@@ -36,7 +36,6 @@ class App {
 
     this.server.use(express.json({ limit: '100mb' }));
     this.server.use(express.urlencoded({ limit: '100mb' }));
-
   }
 
   routes() {

@@ -31,8 +31,8 @@ class MailController {
 
       let contacts = [];
       const { tags } = req.body;
-      if (tags.length === 0) contacts = await Contact.find();
-      else contacts = await Contact.find({ tags: { $in: tags } });
+      if (tags.length === 0) contacts = await Contact.find({ status: true });
+      else contacts = await Contact.find({ tags: { $in: tags }, status: true });
 
       contacts.map(async (contact) => {
         const formUpdate = {

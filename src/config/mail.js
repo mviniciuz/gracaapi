@@ -7,7 +7,7 @@ export default {
   },
   secure: false,
   default: {
-    from: 'Graça Advogados Associados <ci.uniport@onda.com.br>',
+    from: 'Graça Advogados Associados teste <ci.uniport@onda.com.br>',
   },
 };
 

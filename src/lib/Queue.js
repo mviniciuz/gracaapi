@@ -31,12 +31,11 @@ class Queue {
   }
 
   add(queue, job) {
-    return this.queues[queue].bee.createJob(job)
-      .save()
+    return this.queues[queue].bee.createJob(job).save();
   }
 
   processQueue() {
-    jobs.forEach(job => {
+    jobs.forEach((job) => {
       const { bee, handle } = this.queues[job.key];
 
       bee.on('failed', this.handleFailure).process(handle);
