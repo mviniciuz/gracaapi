@@ -11,6 +11,7 @@
     "bee-queue": "^1.2.3",
     "bull-arena": "^2.8.1",
     "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -29,7 +30,8 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "queue": "nodemon src/queue.js",
-    "agenda": "nodemon src/agenda"
+    "agenda": "nodemon src/agenda",
+    "import": "nodemon src/csv"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

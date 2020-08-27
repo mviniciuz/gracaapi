@@ -1,18 +1,19 @@
 import mongoose from 'mongoose';
 
-const Contact = new mongoose.Schema({
-  name: {
-    type: String,
+const Contact = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    mail: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    tags: [String],
+    status: Boolean,
   },
-  mail: {
-    type: String,
-  },
-  phone: {
-    type: String,
-  },
-  tags: [String],
-  status: Boolean
-},
   {
     timestamps: true,
   }

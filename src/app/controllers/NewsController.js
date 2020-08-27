@@ -144,6 +144,39 @@ class NewsController {
         where = { type };
         if (arg !== '') {
           where = {
+            type,
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
+    }
+
+    if (type === 'IE') {
+      if (onlyActive) {
+        where = { activeSite: true, type: { $ne: 'N' } };
+        if (arg !== '') {
+          where = {
+            activeSite: true,
+            type: { $ne: 'N' },
+            $or: [
+              { title: { $regex: arg, $options: 'i' } },
+              { edition: { $regex: arg, $options: 'i' } },
+              { author: { $regex: arg, $options: 'i' } },
+              { data: { $regex: arg, $options: 'i' } },
+            ],
+          };
+        }
+      }
+      if (!onlyActive) {
+        where = { type: { $ne: 'N' } };
+        if (arg !== '') {
+          where = {
+            type: { $ne: 'N' },
             $or: [
               { title: { $regex: arg, $options: 'i' } },
               { edition: { $regex: arg, $options: 'i' } },

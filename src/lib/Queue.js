@@ -6,9 +6,10 @@ import CancellationMail from '../app/jobs/CancellationMail';
 import WorkMail from '../app/jobs/WorkMail';
 import ContactMail from '../app/jobs/ContactMail';
 import LoteMail from '../app/jobs/LoteMail';
+import SendMail from '../app/jobs/SendMail';
 import redisConfig from '../config/redis';
 
-const jobs = [CancellationMail, WorkMail, ContactMail, LoteMail];
+const jobs = [CancellationMail, WorkMail, ContactMail, LoteMail, SendMail];
 
 class Queue {
   constructor() {

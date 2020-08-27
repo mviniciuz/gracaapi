@@ -7,6 +7,7 @@ import News from '../schemas/News';
 import WorkMail from '../jobs/WorkMail';
 import ContactMail from '../jobs/ContactMail';
 import LoteMail from '../jobs/LoteMail';
+import SendMail from '../jobs/SendMail';
 
 class MailController {
   async store(req, res) {
@@ -43,7 +44,13 @@ class MailController {
           author: news.author,
           body: new Buffer(news.body, 'base64').toString('utf-8'),
         };
-        work = await Queue.add(LoteMail.key, { formUpdate });
+
+        if (news.type === 'I') {
+          work = await Queue.add(LoteMail.key, { formUpdate });
+        }
+        if (news.type === 'E') {
+          work = await Queue.add(SendMail.key, { formUpdate });
+        }
       });
     }
 

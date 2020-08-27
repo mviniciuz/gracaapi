@@ -14,7 +14,7 @@ class Database {
         useUnifiedTopology: false,
         useCreateIndex: true,
         useFindAndModify: false,
-      },
+      }
     );
   }
 }
