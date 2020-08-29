@@ -24,7 +24,7 @@ class Queue {
         bee: new Bee(key, {
           redis: redisConfig,
           storeJobs: true,
-          delayedDebounce: 2000,
+          delayedDebounce: 5000,
         }),
         handle,
       };
