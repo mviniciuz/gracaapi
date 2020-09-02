@@ -1,12 +1,13 @@
-import Mail from '../../lib/mail';
+import Mail from '../../../lib/mail';
 
-class LoteMail {
-  get key() {
-    return 'LoteMail';
-  }
+export default {
+  key: 'LoteMail',
+
+  options: {
+    delay: 5000,
+  },
 
   async handle({ data }) {
-
     const { formUpdate } = data;
 
     await Mail.sendMail({
@@ -19,10 +20,8 @@ class LoteMail {
         data: formUpdate.data,
         author: formUpdate.author,
         body: formUpdate.body,
-        encoding: "utf-8"
+        encoding: 'utf-8',
       },
     });
-  }
-}
-
-export default new LoteMail();
+  },
+};

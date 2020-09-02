@@ -9,6 +9,11 @@ export default {
   default: {
     from: 'Graça Advogados Associados <graca@gracainforma.adv.br>',
   },
+  dkim: {
+    domainName: process.env.MAIL_DOMAINNAME,
+    keySelector: process.env.MAIL_KEYSELECTOR,
+    privateKey: process.env.MAIL_PRIVATEKEY,
+  },
 };
 
 /**

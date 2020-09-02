@@ -28,11 +28,11 @@ services:
     ports:
       - 3333:3333
 
-  graca-queue:
+  graca-bull:
     build: .
 
     volumes:
-      - /home/node/api
+      - /home/node/bull
 
     environment:
       - MONGO_URL=graca-mongo
@@ -45,8 +45,8 @@ services:
     links:
       - graca-mongo
       - graca-redis
-    container_name: graca-queue
-    command: yarn queue
+    container_name: graca-bull
+    command: yarn queuebull
 
   graca-mongo:
     image: bitnami/mongodb:latest

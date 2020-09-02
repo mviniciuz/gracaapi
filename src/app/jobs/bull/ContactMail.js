@@ -1,12 +1,12 @@
-import Mail from '../../lib/mail';
+import Mail from '../../../lib/mail';
 
-class ContactMail {
-  get key() {
-    return 'ContactMail';
-  }
+export default {
+  key: 'ContactMail',
+  options: {
+    delay: 5000,
+  },
 
   async handle({ data }) {
-
     const { form } = data;
 
     await Mail.sendMail({
@@ -20,7 +20,5 @@ class ContactMail {
         message: form.message,
       },
     });
-  }
-}
-
-export default new ContactMail();
+  },
+};

@@ -1,8 +1,16 @@
-import Mail from '../../lib/mail';
+import Mail from '../../../lib/mail';
 
 class SendMail {
   get key() {
     return 'sendMail';
+  }
+
+  options() {
+    return {
+      options: {
+        delay: 5000,
+      },
+    };
   }
 
   async handle({ data }) {

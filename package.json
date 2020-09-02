@@ -9,6 +9,7 @@
     "agendash": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
+    "bull": "^3.18.0",
     "bull-arena": "^2.8.1",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
@@ -18,6 +19,7 @@
     "express-async-errors": "^3.1.1",
     "express-handlebars": "^4.0.4",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.18",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.8",
@@ -30,6 +32,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "queue": "nodemon src/queue.js",
+    "queuebull": "nodemon src/queuebull.js",
     "agenda": "nodemon src/agenda",
     "import": "nodemon src/csv"
   },

@@ -1,12 +1,10 @@
 import Bee from 'bee-queue';
 
-import Mail from '../app/schemas/Mail';
-
-import CancellationMail from '../app/jobs/CancellationMail';
-import WorkMail from '../app/jobs/WorkMail';
-import ContactMail from '../app/jobs/ContactMail';
-import LoteMail from '../app/jobs/LoteMail';
-import SendMail from '../app/jobs/SendMail';
+import CancellationMail from '../app/jobs/bee/CancellationMail';
+import WorkMail from '../app/jobs/bee/WorkMail';
+import ContactMail from '../app/jobs/bee/ContactMail';
+import LoteMail from '../app/jobs/bee/LoteMail';
+import SendMail from '../app/jobs/bee/SendMail';
 import redisConfig from '../config/redis';
 
 const jobs = [CancellationMail, WorkMail, ContactMail, LoteMail, SendMail];
@@ -24,7 +22,8 @@ class Queue {
         bee: new Bee(key, {
           redis: redisConfig,
           storeJobs: true,
-          delayedDebounce: 5000,
+          activateDelayedJobs: true,
+          delayedDebounce: 30000,
         }),
         handle,
       };
@@ -38,7 +37,6 @@ class Queue {
   processQueue() {
     jobs.forEach((job) => {
       const { bee, handle } = this.queues[job.key];
-
       bee.on('failed', this.handleFailure).process(handle);
     });
   }

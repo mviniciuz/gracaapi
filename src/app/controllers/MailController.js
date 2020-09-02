@@ -1,13 +1,13 @@
-import Queue from '../../lib/Queue';
+import Queue from '../../lib/QueueBull';
 
 import Mail from '../schemas/Mail';
 import Contact from '../schemas/Contact';
 import News from '../schemas/News';
 
-import WorkMail from '../jobs/WorkMail';
-import ContactMail from '../jobs/ContactMail';
-import LoteMail from '../jobs/LoteMail';
-import SendMail from '../jobs/SendMail';
+import WorkMail from '../jobs/bull/WorkMail';
+import ContactMail from '../jobs/bull/ContactMail';
+import LoteMail from '../jobs/bull/LoteMail';
+import SendMail from '../jobs/bull/SendMail';
 
 class MailController {
   async store(req, res) {
