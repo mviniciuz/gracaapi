@@ -32,6 +32,7 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
+
     this.server.use('/', arenaConfig);
 
     this.server.use(express.json({ limit: '100mb' }));
