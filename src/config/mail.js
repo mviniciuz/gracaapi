@@ -7,7 +7,7 @@ export default {
   },
   secure: false,
   default: {
-    from: 'Graça Advogados Associados <graca@gracainforma.adv.br>',
+    from: 'Graça Advogados Associados <graca@informa.adv.br>',
   },
   dkim: {
     domainName: process.env.MAIL_DOMAINNAME,
